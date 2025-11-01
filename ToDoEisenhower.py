@@ -64,11 +64,10 @@ def deleteTask():
     taskNum = 0
     # updatedList()
     while type(taskNum) is int:
-        myRange = (0,len(updated_tasks))
+        myRange = range(0,len(updated_tasks))
         try:
             taskNum = int(input("What task number would you like to delete? "))
             taskNum = taskNum - 1 
-            print(taskNum in myRange)
             if taskNum in myRange:
                 break
             else:
@@ -76,8 +75,12 @@ def deleteTask():
         except:
             print("Please write an integer number")
             continue
-    # print(updated_tasks)
+
+    #need to delete from user_tasks
+    index = user_tasks.index(updated_tasks[taskNum])
+    del user_tasks[index]
     del updated_tasks[taskNum]
+    
     # print(updated_tasks)
     menu(4)
     return
@@ -85,18 +88,21 @@ def deleteTask():
 
 def viewTasks():
     print("")
-    updatedList()
+    updated_tasks.clear()
+    for task in user_tasks:
+        if task != None: 
+            updated_tasks.append(task)
     for i in range(len(updated_tasks)):
         print(str(i + 1) + ". " + updated_tasks[i])
     menu(4)
     return
 
-def updatedList():
-    for task in user_tasks:
-        if task != None: 
-            updated_tasks.append(task)
-            print(updated_tasks)
-    return
+# def updatedList():
+#     for task in user_tasks:
+#         if task != None: 
+#             updated_tasks.append(task)
+#             print(updated_tasks)
+#     return
 
 
 
