@@ -2,6 +2,30 @@ user_tasks = [None] * 25
 # task_rankings = []
 eishenhower_ranking = [30,29,28,25,24,23,20,19,18,27,22,17,26,21,16,15,14,13,10,9,8,12,11,7,6]                                                                                                                                                       
 
+def menu(userChoice):
+    while userChoice > 3 or userChoice < 0:
+        print("")
+        print("1) Add a task")
+        print("2) Delete a task")
+        print("3) View your task list")
+        print("4) Quit")
+        try:
+            userChoice = int(input())
+        except:
+            continue
+        
+        print("")
+        if userChoice == 1: 
+            addTask()
+        elif userChoice == 2:
+            deleteTask()
+        elif userChoice == 3: 
+            viewTasks()
+        else:
+            break
+    return
+
+
 def addTask():
     userQuit = False
     while not userQuit:
@@ -29,7 +53,7 @@ def addTask():
         userContinue = input("Would you like to enter another task? [yes/no] ")
         userContinue = userContinue.lower()
         if userContinue == "no":
-            viewTasks()
+            menu(4)
             break
         else:
             continue
@@ -37,35 +61,35 @@ def addTask():
 
 
 def deleteTask():
-    viewTasks()
-    print("What task would you like to delete?")
+    taskNum = 0
+    while int(taskNum):
+        try:
+            taskNum = int(input("What task number would you like to delete?"))
+            if taskNum in range(len(user_tasks)):
+                break
+            else:
+                continue
+        except:
+            print("Please write an integer number")
+            continue
+    del user_tasks[taskNum + 1]
+    menu(4)
     return
 
+
 def viewTasks():
+    print("")
     updated_tasks = []
     for task in user_tasks:
-        if task != None:
+        if task != None: 
             updated_tasks.append(task)
     
     for i in range(len(updated_tasks)):
         print(str(i + 1) + ". " + updated_tasks[i])
+    menu(4)
     return
 
+
+
 print("Welcome to your todo list!")
-
-userChoice = 4
-while userChoice > 3 or userChoice < 0:
-    print("1) Add a task")
-    print("2) Delete a task")
-    print("3) View your task list")
-    try:
-        userChoice = int(input())
-    except:
-        continue
-
-if userChoice == 1:
-    addTask()
-elif userChoice == 2:
-    deleteTask()
-else:
-    viewTasks()
+userChoice = menu(4)
