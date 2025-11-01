@@ -29,6 +29,7 @@ def addTask():
         userContinue = input("Would you like to enter another task? [yes/no] ")
         userContinue = userContinue.lower()
         if userContinue == "no":
+            viewTasks()
             break
         else:
             continue
@@ -36,10 +37,18 @@ def addTask():
 
 
 def deleteTask():
-    
+    viewTasks()
+    print("What task would you like to delete?")
     return
 
 def viewTasks():
+    updated_tasks = []
+    for task in user_tasks:
+        if task != None:
+            updated_tasks.append(task)
+    
+    for i in range(len(updated_tasks)):
+        print(str(i + 1) + ". " + updated_tasks[i])
     return
 
 print("Welcome to your todo list!")
