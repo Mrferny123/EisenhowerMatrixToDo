@@ -10,7 +10,7 @@ def menu(userChoice):
         print("3) View your task list")
         print("4) Quit")
         try:
-            userChoice = int(input())
+            userChoice = int(input("-> "))
         except:
             continue
         
@@ -62,9 +62,8 @@ def addTask():
 
 def deleteTask():
     taskNum = 0
-    # viewTasks()
+    # updatedList()
     while type(taskNum) is int:
-        updatedList()
         myRange = (0,len(updated_tasks))
         try:
             taskNum = int(input("What task number would you like to delete? "))
@@ -77,9 +76,9 @@ def deleteTask():
         except:
             print("Please write an integer number")
             continue
-    print(updated_tasks)
+    # print(updated_tasks)
     del updated_tasks[taskNum]
-    print(updated_tasks)
+    # print(updated_tasks)
     menu(4)
     return
 
@@ -96,8 +95,7 @@ def updatedList():
     for task in user_tasks:
         if task != None: 
             updated_tasks.append(task)
-    print(updated_tasks)
-    # return updated_tasks
+            print(updated_tasks)
     return
 
 
