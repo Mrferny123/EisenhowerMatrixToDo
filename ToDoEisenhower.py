@@ -1,10 +1,10 @@
 user_tasks = [None] * 25
-# task_rankings = []
+updated_tasks = []
 eishenhower_ranking = [30,29,28,25,24,23,20,19,18,27,22,17,26,21,16,15,14,13,10,9,8,12,11,7,6]                                                                                                                                                       
 
 def menu(userChoice):
     while userChoice > 3 or userChoice < 0:
-        print("")
+        print("\n")
         print("1) Add a task")
         print("2) Delete a task")
         print("3) View your task list")
@@ -29,7 +29,7 @@ def menu(userChoice):
 def addTask():
     userQuit = False
     while not userQuit:
-        userTask = input("Input your task you would like to enter\n")
+        userTask = input("\nInput your task you would like to enter\n")
 
         importance = -1
         urgent = -1
@@ -62,31 +62,42 @@ def addTask():
 
 def deleteTask():
     taskNum = 0
-    while int(taskNum):
+    # viewTasks()
+    while type(taskNum) is int:
+        updatedList()
+        myRange = (0,len(updated_tasks))
         try:
-            taskNum = int(input("What task number would you like to delete?"))
-            if taskNum in range(len(user_tasks)):
+            taskNum = int(input("What task number would you like to delete? "))
+            taskNum = taskNum - 1 
+            print(taskNum in myRange)
+            if taskNum in myRange:
                 break
             else:
                 continue
         except:
             print("Please write an integer number")
             continue
-    del user_tasks[taskNum + 1]
+    print(updated_tasks)
+    del updated_tasks[taskNum]
+    print(updated_tasks)
     menu(4)
     return
 
 
 def viewTasks():
     print("")
-    updated_tasks = []
-    for task in user_tasks:
-        if task != None: 
-            updated_tasks.append(task)
-    
+    updatedList()
     for i in range(len(updated_tasks)):
         print(str(i + 1) + ". " + updated_tasks[i])
     menu(4)
+    return
+
+def updatedList():
+    for task in user_tasks:
+        if task != None: 
+            updated_tasks.append(task)
+    print(updated_tasks)
+    # return updated_tasks
     return
 
 
